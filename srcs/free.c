@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.c                                           :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/18 20:41:41 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/19 00:08:57 by lseema           ###   ########.fr       */
+/*   Created: 2020/11/18 23:43:33 by lseema            #+#    #+#             */
+/*   Updated: 2020/11/19 00:08:52 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem-in.h"
 
-int		print_error()
+void	free_all(t_lemin **lemin)
 {
-	ft_putendl_fd("ERROR", 2);
-	return (0);
-}
-
-int		main()
-{
-	t_lemin *lemin;
-
-	if (!(lemin = (t_lemin*)malloc(sizeof(t_lemin))))
-		return print_error();
-	parse(&lemin);
-	return (0);
+	if (*lemin)
+		free(lemin);
 }

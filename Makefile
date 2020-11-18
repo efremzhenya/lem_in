@@ -6,7 +6,7 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/27 16:30:25 by lseema            #+#    #+#              #
-#    Updated: 2020/11/18 21:15:04 by lseema           ###   ########.fr        #
+#    Updated: 2020/11/19 00:09:27 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ SRC_DIR = srcs/
 LIBFT_DIR = libft/
 OBJ_DIR = obj/
 LEMIN_SRCS = lem-in.c\
-	validate.c
+	validate.c\
+	parse.c\
+	free.c
 LEMIN_OBJ = ${LEMIN_SRCS:c=o}
 
 all: $(LEMIN)
