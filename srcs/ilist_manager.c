@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 06:01:54 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/21 23:46:51 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/22 20:09:58 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_ilist		*new_ilist_elem(size_t index)
 	if (!(elem = (t_ilist *)malloc(sizeof(t_ilist))))
 		return (NULL);
 	elem->index = index;
-	elem->next = NULL;;
+	elem->next = NULL;
 	return (elem);
 }
 
@@ -42,6 +42,7 @@ t_adj	*new_adj(size_t index)
 		return (NULL);
 	adj->index = index;
 	adj->links = NULL;
+	adj->next = NULL;
 	return (adj);
 }
 

@@ -17,7 +17,7 @@
 			"MIMode": "lldb",
 			"setupCommands": [
 				{
-					"text": "settings set target.input-path ${workspaceFolder}/10K.map"
+					"text": "settings set target.input-path ${workspaceFolder}/map.txt"
 				}
 			],
 			"preLaunchTask": "C/C++: gcc build active file"

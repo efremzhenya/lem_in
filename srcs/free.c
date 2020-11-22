@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 23:43:33 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/21 23:46:42 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/22 19:58:36 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	free_all(t_lemin **lemin, t_line **lines, t_vertex **rooms)
 {
-	if ((*lemin)->rooms > 0 && (*lemin)->adj)
-		free_adj((*lemin)->adj, (*lemin)->rooms);
 	if (lemin)
+	{
+		if ((*lemin)->rooms > 0 && (*lemin)->adj)
+			free_adj((*lemin)->adj, (*lemin)->rooms);
+		if ((*lemin)->bfs_queue)
+		{
+			free((*lemin)->bfs_queue);
+		}
 		free(*lemin);
+	}
 	if (*lines)
 		free_lines(lines);
 	if (*rooms)

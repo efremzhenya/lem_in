@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:41:41 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 14:50:08 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/22 20:11:02 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		init_lemin(t_lemin **lemin)
 	(*lemin)->start_room = NULL;
 	(*lemin)->end_room = NULL;
 	(*lemin)->adj = NULL;
+	(*lemin)->bfs_queue = NULL;
 	return (1);
 }
 
@@ -74,11 +75,12 @@ int		main()
 	lines = NULL;
 	if (!init_lemin(&lemin)
 		|| (lemin->lines = parse_lines(&lines, &lemin, &rooms)) < 6
-		|| !lemin->links)
+		|| !lemin->links || !new_queue(&lemin->bfs_queue))
 	{
 		free_all(&lemin, &lines, &rooms);
 		return print_error();
 	}
+	bfs(&lemin);
 	print_lines(&lines);
 	print_adj_list(&lemin);
 	free_all(&lemin, &lines, &rooms);

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:41:38 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 14:35:57 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/22 20:01:49 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,15 @@ typedef struct		s_ilist
 typedef struct		s_adj
 {
 	size_t					index;
+	struct s_adj			*next;		//используется толко в очереди
 	t_ilist					*links;
 }							t_adj;
+
+typedef struct		s_queue
+{
+	t_adj			*front;
+	t_adj			*rear;
+}					t_queue;
 
 typedef struct		s_vertex
 {
@@ -48,6 +55,7 @@ typedef struct		s_lemin
 	int						step;
 	int						next_is_start;
 	int						next_is_end;
+	t_queue					*bfs_queue;
 }							t_lemin;
 
 typedef struct		s_line
@@ -101,5 +109,14 @@ void						free_rooms(t_vertex **rooms);
 void						free_links(t_ilist **list);
 int							free_str_arr(char **temp);
 void						free_adj(t_adj **row, size_t count);
+
+//queue
+int							new_queue(t_queue **queue);
+void						enqueue(t_queue **queue, t_adj *adj);
+t_adj						*dequeue(t_queue **queue);
+
+
+//bfs
+void						bfs(t_lemin **lemin);
 
 #endif

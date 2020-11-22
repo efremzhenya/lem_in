@@ -6,7 +6,7 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/27 16:30:25 by lseema            #+#    #+#              #
-#    Updated: 2020/11/22 15:04:41 by lseema           ###   ########.fr        #
+#    Updated: 2020/11/22 20:00:31 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ LEMIN_SRCS = lem-in.c\
 	print_result.c\
 	parse_links.c\
 	validators.c\
+	queue_manager.c\
+	bfs.c\
 	free.c
 
 LEMIN_OBJ = ${LEMIN_SRCS:c=o}
