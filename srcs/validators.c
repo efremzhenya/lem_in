@@ -1,60 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   validators.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/18 23:32:43 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/19 00:09:48 by lseema           ###   ########.fr       */
+/*   Created: 2020/11/21 23:37:07 by lseema            #+#    #+#             */
+/*   Updated: 2020/11/22 14:35:38 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem-in.h"
 
-char	*read_next_line()
+size_t		ft_chrcount(char *line, char c)
 {
-	char	*line;
+	size_t	count;
 
-	line = NULL;
-	return get_next_line(0, &line) > 0 ? line : NULL;
-}
-
-int		parse(t_lemin **lemin)
-{
-	if (!parse_ants(lemin, read_next_line()))
-		return (0);
-	return(1);
-}
-
-int		parse_ants(t_lemin **lemin, char *line)
-{
-	if (!*line)
-		return (0);
-	if (ft_strlen(line) > 10 || !validate_positive_num(line))
+	count = 0;
+	while (*line)
 	{
-		free(line);
-		return(0);
+		if (*line == c)
+			count++;
+		line++;
 	}
-	else
-	{
-		(*lemin)->ants_count = ft_atoi(line);
-		free(line);
-		return(1);
-	}
+	return count;
 }
 
-int		validate_positive_num(char *argv)
+int		valid_int(char *argv)
 {
 	long long	res;
 	int			i;
 
 	res = ft_atoi(argv);
-	if (ft_strlen(argv) > 10 || res < 1 || res > 2147483647)
+	if (ft_strlen(argv) > 11 || res < -2147483648 || res > 2147483647)
 		return (0);
 	i = 0;
 	while (argv[i] != '\0')
-		if (argv[i] == '-' && i == 0 && ft_strlen(argv) > 1)
+		if ((argv[i] == '-' || argv[i] == '+') && i == 0 && ft_strlen(argv) > 1)
+			i++;
+		else if (!ft_isdigit(argv[i++]))
+			return (0);
+	return (1);
+}
+
+int		valid_positive_int(char *argv)
+{
+	long long	res;
+	int			i;
+
+	res = ft_atoi(argv);
+	if (ft_strlen(argv) > 11 || res < 1 || res > 2147483647)
+		return (0);
+	i = 0;
+	while (argv[i] != '\0')
+		if ((argv[i] == '-' || argv[i] == '+') && i == 0 && ft_strlen(argv) > 1)
 			i++;
 		else if (!ft_isdigit(argv[i++]))
 			return (0);

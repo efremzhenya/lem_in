@@ -6,7 +6,7 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/27 16:30:25 by lseema            #+#    #+#              #
-#    Updated: 2020/11/19 00:09:27 by lseema           ###   ########.fr        #
+#    Updated: 2020/11/22 15:04:41 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,17 @@ SRC_DIR = srcs/
 LIBFT_DIR = libft/
 OBJ_DIR = obj/
 LEMIN_SRCS = lem-in.c\
-	validate.c\
-	parse.c\
+	parse_lines.c\
+	parse_ants.c\
+	parse_room.c\
+	vertex_manager.c\
+	ilist_manager.c\
+	line_manager.c\
+	print_result.c\
+	parse_links.c\
+	validators.c\
 	free.c
+
 LEMIN_OBJ = ${LEMIN_SRCS:c=o}
 
 all: $(LEMIN)

@@ -6,14 +6,100 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 23:43:33 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/19 00:08:52 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/21 23:46:42 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem-in.h"
 
-void	free_all(t_lemin **lemin)
+void	free_all(t_lemin **lemin, t_line **lines, t_vertex **rooms)
 {
-	if (*lemin)
-		free(lemin);
+	if ((*lemin)->rooms > 0 && (*lemin)->adj)
+		free_adj((*lemin)->adj, (*lemin)->rooms);
+	if (lemin)
+		free(*lemin);
+	if (*lines)
+		free_lines(lines);
+	if (*rooms)
+		free_rooms(rooms);
+}
+
+void	free_adj(t_adj **row, size_t count)
+{
+	size_t i;
+
+	i = 0;
+	while (i < count)
+	{
+		free_links(&row[i]->links);
+		free(row[i]);
+		i++;
+	}
+	free(row);
+}
+
+void	free_links(t_ilist **links)
+{
+	t_ilist *tail;
+
+	if (*links)
+	{
+		tail = *links;
+		while (tail->next)
+		{
+			*links = tail;
+			tail = tail->next;
+			free(*links);
+		}
+		free(tail);
+	}
+}
+
+void	free_lines(t_line **lines)
+{
+	t_line *tail;
+
+	if (*lines)
+	{
+		tail = *lines;
+		while (tail->next)
+		{
+			*lines = tail;
+			tail = tail->next;
+			free((*lines)->value);
+			free(*lines);
+		}
+		free(tail->value);
+		free(tail);
+	}
+}
+
+void	free_rooms(t_vertex **rooms)
+{
+	t_vertex *tail;
+
+	if (*rooms)
+	{
+		tail = *rooms;
+		while (tail->next)
+		{
+			*rooms = tail;
+			tail = tail->next;
+			free((*rooms)->name);
+			free(*rooms);
+		}
+		free(tail->name);
+		free(tail);
+	}
+}
+
+int		free_str_arr(char **temp)
+{
+	size_t i;
+
+	i = 0;
+	while (temp[i])
+		free(temp[i++]);
+	free(temp);
+	return (0);
 }
