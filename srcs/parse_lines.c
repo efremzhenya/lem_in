@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 22:59:10 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/21 23:46:31 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/25 21:24:53 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int		parse_line(char *line, t_lemin **lemin, t_vertex **rooms)
 	size_t i;
 
 	i = 0;
-	if ((*lemin)->step == 0)
+	if ((*lemin)->step == ANT)
 		return parse_ants(line, lemin);
-	else if ((*lemin)->step == 1)
+	else if ((*lemin)->step == ROOMS)
 		if (!parse_room_type(line, lemin, rooms))
-			(*lemin)->step++;
-	if ((*lemin)->step == 2)
+			(*lemin)->step = LINKS;
+	if ((*lemin)->step == LINKS)
 	{
 		if (!(*lemin)->start_room || !(*lemin)->end_room)
 			return (0);

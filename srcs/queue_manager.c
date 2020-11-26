@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 17:44:17 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 20:16:56 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/23 23:20:41 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	enqueue(t_queue **queue, t_adj *adj)
 		(*queue)->rear = adj;
 	}
 	else
+	{
 		(*queue)->rear->next = adj;
+		(*queue)->rear = adj;
+	}
 }
 
 t_adj	*dequeue(t_queue **queue)
@@ -51,4 +54,10 @@ t_adj	*dequeue(t_queue **queue)
 		elem->next = NULL;
 	}
 	return elem;
+}
+
+void	clear_queue(t_queue **queue)
+{
+	while ((*queue)->front)
+		dequeue(queue);
 }

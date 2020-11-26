@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 02:13:50 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 14:38:08 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/23 22:53:01 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,16 @@ size_t		get_room_index(char *name, t_vertex **rooms)
 	if (!ft_strcmp(name, tail->name))
 		return (tail->index);
 	return (-1);
+}
+
+t_vertex	*get_last_added(t_vertex **rooms)
+{
+	t_vertex	*tail;
+
+	if (!rooms)
+		return (NULL);
+	tail = *rooms;
+	while (tail->next)
+		tail = tail->next;
+	return tail;
 }

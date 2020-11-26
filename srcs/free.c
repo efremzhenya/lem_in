@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 23:43:33 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 19:58:36 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/27 00:01:13 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	free_all(t_lemin **lemin, t_line **lines, t_vertex **rooms)
 		if ((*lemin)->rooms > 0 && (*lemin)->adj)
 			free_adj((*lemin)->adj, (*lemin)->rooms);
 		if ((*lemin)->bfs_queue)
-		{
 			free((*lemin)->bfs_queue);
-		}
+		if ((*lemin)->paths)
+			free_paths(&(*lemin)->paths);
 		free(*lemin);
 	}
 	if (*lines)
@@ -108,4 +108,23 @@ int		free_str_arr(char **temp)
 		free(temp[i++]);
 	free(temp);
 	return (0);
+}
+
+void	free_paths(t_path **paths)
+{
+	t_path *tail;
+
+	if (*paths)
+	{
+		tail = *paths;
+		while (tail->next)
+		{
+			*paths = tail;
+			tail = tail->next;
+			free((*paths)->vrt_indexes);
+			free(*paths);
+		}
+		free(tail->vrt_indexes);
+		free(tail);
+	}
 }

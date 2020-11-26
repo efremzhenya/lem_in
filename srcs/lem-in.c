@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:41:41 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 20:11:02 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/27 00:05:18 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@ int		init_lemin(t_lemin **lemin)
 	if (!(*lemin = (t_lemin*)malloc(sizeof(t_lemin))))
 		return (0);
 	(*lemin)->ants = 0;
-	(*lemin)->step = 0;
-	(*lemin)->next_is_end = 0;
-	(*lemin)->next_is_start = 0;
+	(*lemin)->step = ANT;
+	(*lemin)->next_is_end = FALSE;
+	(*lemin)->next_is_start = FALSE;
 	(*lemin)->links = 0;
 	(*lemin)->rooms = 0;
 	(*lemin)->lines = 0;
+	(*lemin)->routes = 0;
 	(*lemin)->start_room = NULL;
 	(*lemin)->end_room = NULL;
 	(*lemin)->adj = NULL;
 	(*lemin)->bfs_queue = NULL;
+	(*lemin)->paths = NULL;
 	return (1);
 }
 
@@ -75,12 +77,17 @@ int		main()
 	lines = NULL;
 	if (!init_lemin(&lemin)
 		|| (lemin->lines = parse_lines(&lines, &lemin, &rooms)) < 6
-		|| !lemin->links || !new_queue(&lemin->bfs_queue))
+		|| !lemin->links)
 	{
 		free_all(&lemin, &lines, &rooms);
 		return print_error();
 	}
-	bfs(&lemin);
+	first_find_path(&lemin);
+	if (!lemin->routes)
+	{
+		free_all(&lemin, &lines, &rooms);
+		return print_error();
+	}
 	print_lines(&lines);
 	print_adj_list(&lemin);
 	free_all(&lemin, &lines, &rooms);

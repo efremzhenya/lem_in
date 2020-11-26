@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 22:45:27 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 14:35:59 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/26 23:15:51 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@ int		parse_room_type(char *line, t_lemin **lemin, t_vertex **rooms)
 	if ((*lemin)->next_is_start)
 	{
 		if (parse_room(line, lemin, rooms))
-			(*lemin)->start_room = *rooms;
-		(*lemin)->next_is_start = 0;
+			(*lemin)->start_room = get_last_added(rooms);
+		(*lemin)->next_is_start = FALSE;
 		return ((*lemin)->start_room != NULL);
 	}
 	else if ((*lemin)->next_is_end)
 	{
 		if (parse_room(line, lemin, rooms))
-			(*lemin)->end_room = *rooms;
-		(*lemin)->next_is_end = 0;
+			(*lemin)->end_room = get_last_added(rooms);
+		(*lemin)->next_is_end = FALSE;
 		return ((*lemin)->end_room != NULL);
 	}
 	else if (!ft_strcmp(line, "##start"))
-		return ((*lemin)->start_room == NULL && !(*lemin)->next_is_start
-			&& !(*lemin)->next_is_end ? (*lemin)->next_is_start = 1 : 0);
+		return ((*lemin)->next_is_start = (*lemin)->start_room == NULL
+		&& !(*lemin)->next_is_start && !(*lemin)->next_is_end);
 	else if (!ft_strcmp(line, "##end"))
-		return ((*lemin)->end_room == NULL && !(*lemin)->next_is_start
-			&& !(*lemin)->next_is_end ? (*lemin)->next_is_end = 1 : 0);
+		return ((*lemin)->next_is_end = ((*lemin)->end_room == NULL
+		&& !(*lemin)->next_is_start && !(*lemin)->next_is_end));
 	else
 		return parse_room(line, lemin, rooms);
 }

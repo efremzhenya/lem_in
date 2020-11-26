@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:41:38 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 20:01:49 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/27 00:01:01 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,38 @@
 # define LEM_IN_H
 # include "../libft/libft.h"
 
+//BOOLEAN
+# define TRUE 1
+# define FALSE 0
+
+//VERTEX TYPE
+# define DUPLEX 0
+# define IN 1
+# define OUT 2
+
+//CURRENT DATA READ STEP
+# define ANT 0
+# define ROOMS 1
+# define LINKS 2
+
+typedef struct 				s_bfs
+{
+	unsigned int			*used;
+	size_t					*parent;
+	size_t					*distance;
+}							t_bfs;
+
+typedef struct				s_path
+{
+	size_t					length;
+	size_t					*vrt_indexes;
+	struct s_path			*next;
+}							t_path;
+
 typedef struct		s_ilist
 {
 	size_t					index;
+	int						weight:2;
 	struct s_ilist			*next;
 }							t_ilist;
 
@@ -27,11 +56,11 @@ typedef struct		s_adj
 	t_ilist					*links;
 }							t_adj;
 
-typedef struct		s_queue
+typedef struct				s_queue
 {
-	t_adj			*front;
-	t_adj			*rear;
-}					t_queue;
+	t_adj					*front;
+	t_adj					*rear;
+}							t_queue;
 
 typedef struct		s_vertex
 {
@@ -49,13 +78,15 @@ typedef struct		s_lemin
 	size_t					links;
 	int						ants;
 	size_t					lines;
+	unsigned int			routes;
 	struct s_vertex			*start_room;
 	struct s_vertex			*end_room;
 	struct s_adj			**adj;
-	int						step;
-	int						next_is_start;
-	int						next_is_end;
+	unsigned int			step:2;
+	unsigned int			next_is_start:1;
+	unsigned int			next_is_end:1;
 	t_queue					*bfs_queue;
+	t_path					*paths;
 }							t_lemin;
 
 typedef struct		s_line
@@ -85,6 +116,7 @@ int							add_vertex(t_vertex **rooms, t_vertex *vertex);
 t_vertex					*new_vertex(char *name, size_t index, int x, int y);
 int							is_room_dup(t_vertex **rooms, char *name, int x, int y);
 int							is_room_contain(t_vertex	**rooms, char *name);
+t_vertex					*get_last_added(t_vertex **rooms);
 
 size_t						get_room_index(char *name, t_vertex **rooms);
 //parse_room_type
@@ -114,9 +146,18 @@ void						free_adj(t_adj **row, size_t count);
 int							new_queue(t_queue **queue);
 void						enqueue(t_queue **queue, t_adj *adj);
 t_adj						*dequeue(t_queue **queue);
-
+void						clear_queue(t_queue **queue);
 
 //bfs
-void						bfs(t_lemin **lemin);
+int							first_find_path(t_lemin **lemin);
+int							init_bfs(t_lemin **lemin, t_bfs **bfs);
+int							bfs_algorithm(t_lemin **lemin, t_bfs **bfs);
+int							reverse_finded_path(t_lemin **lemin, t_bfs **bfs);
+void						free_bfs(t_bfs **bfs);
+
+//path
+t_path						*new_path(size_t length, size_t *indexes);
+int							add_path(t_path **paths, t_path *path);
+void						free_paths(t_path **paths);
 
 #endif
