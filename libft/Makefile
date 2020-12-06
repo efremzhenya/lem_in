@@ -6,13 +6,13 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 16:59:57 by lseema            #+#    #+#              #
-#    Updated: 2020/11/19 23:14:39 by lseema           ###   ########.fr        #
+#    Updated: 2020/12/05 23:39:51 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -c
+FLAGS = -g -O0 -Wall -Werror -Wextra -c
 INCLUDES = -I$(HEADERS_DIRECTORY)
 HEADERS_LIST = libft.h
 HEADERS_DIRECTORY = ./

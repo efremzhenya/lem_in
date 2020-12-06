@@ -6,19 +6,21 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 06:01:54 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 20:09:58 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/01 20:56:26 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem-in.h"
 
-t_ilist		*new_ilist_elem(size_t index)
+t_ilist		*new_ilist_elem(size_t index, int weight, int is_blocked)
 {
 	t_ilist *elem;
 
 	if (!(elem = (t_ilist *)malloc(sizeof(t_ilist))))
 		return (NULL);
 	elem->index = index;
+	elem->weight = weight;
+	elem->is_blocked = is_blocked;
 	elem->next = NULL;
 	return (elem);
 }
@@ -35,15 +37,37 @@ int			add_ilist(t_ilist **list, t_ilist *elem)
 	return (1);
 }
 
-t_adj	*new_adj(size_t index)
+t_adj	*new_adj(t_vertex *room, size_t index)
 {
 	t_adj *adj;
 	if (!(adj = (t_adj *)malloc(sizeof(t_adj))))
 		return (NULL);
 	adj->index = index;
+	adj->room = room;
 	adj->links = NULL;
 	adj->next = NULL;
 	return (adj);
+}
+
+int		init_adj(t_vertex **vertexes, t_lemin **lemin)
+{
+	t_vertex	*rooms;
+	size_t		i;
+
+	if (!*vertexes)
+		return (0);
+	if (!((*lemin)->adj = (t_adj **)malloc(sizeof(t_adj *) * (*lemin)->rooms)))
+		return (0);
+	i = 0;
+	rooms = *vertexes;
+	while (rooms->next)
+	{
+		(*lemin)->adj[i] = new_adj(rooms, i);
+		i++;
+		rooms = rooms->next;
+	}
+	(*lemin)->adj[i] = new_adj(rooms, i);
+	return (1);
 }
 
 int			is_link_exists(size_t ind1, size_t ind2, t_adj **row, size_t num)
@@ -73,4 +97,20 @@ int			is_link_exists(size_t ind1, size_t ind2, t_adj **row, size_t num)
 			i++;
 	}
 	return (0);
+}
+
+t_ilist		*find_link_by_index(t_ilist **ilist, size_t index)
+{
+	t_ilist *tail;
+
+	if (!*ilist)
+		return (NULL);
+	tail = *ilist;
+	while (tail->next)
+	{
+		if (tail->index == index)
+			return (tail);
+		tail = tail->next;
+	}
+	return (tail->index == index ? tail : NULL);
 }

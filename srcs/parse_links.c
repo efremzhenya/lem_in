@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 06:01:23 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/21 23:49:28 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/01 20:57:39 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ int		parse_link(char *line, t_lemin **lemin, t_vertex **rooms)
 	{
 		index1 = get_room_index(splits[0], rooms);
 		index2 = get_room_index(splits[1], rooms);
-		if (!is_link_exists(index1,index2, (*lemin)->adj, (*lemin)->rooms))
+		if (!is_link_exists(index1, index2, (*lemin)->adj, (*lemin)->rooms))
 		{
 			free_str_arr(splits);
 			if (((*lemin)->adj[index1]->links) == NULL)
-				(*lemin)->adj[index1]->links = new_ilist_elem(index2);
+				(*lemin)->adj[index1]->links = new_ilist_elem(index2, 1, 0);
 			else
-				add_ilist(&(*lemin)->adj[index1]->links, new_ilist_elem(index2));
+				add_ilist(&(*lemin)->adj[index1]->links, new_ilist_elem(index2, 1, 0));
 			if (((*lemin)->adj[index2]->links) == NULL)
-				(*lemin)->adj[index2]->links = new_ilist_elem(index1);
+				(*lemin)->adj[index2]->links = new_ilist_elem(index1, 1, 0);
 			else
-				add_ilist(&(*lemin)->adj[index2]->links, new_ilist_elem(index1));
+				add_ilist(&(*lemin)->adj[index2]->links, new_ilist_elem(index1, 1, 0));
 			(*lemin)->links++;
 			return (1);
 		}

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 04:36:33 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/21 04:52:24 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 01:15:41 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	print_lines(t_line **lines)
 		ft_putstr(tail->value);
 		write(1, "\n", 1);
 	}
+	write(1, "\n", 1);
 }

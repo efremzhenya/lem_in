@@ -6,12 +6,12 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/27 16:30:25 by lseema            #+#    #+#              #
-#    Updated: 2020/11/26 22:35:46 by lseema           ###   ########.fr        #
+#    Updated: 2020/12/05 23:39:56 by lseema           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LEMIN = lem-in
-CC = gcc -g -Wall -Wextra -Werror
+CC = gcc -g -O0 -Wall -Wextra -Werror
 SRC_DIR = srcs/
 LIBFT_DIR = libft/
 OBJ_DIR = obj/
@@ -26,8 +26,13 @@ LEMIN_SRCS = lem-in.c\
 	parse_links.c\
 	validators.c\
 	queue_manager.c\
-	bfs.c\
 	path_manager.c\
+	alg_dejkstra.c\
+	alg_suurballe.c\
+	set_manager.c\
+	preparation_path.c\
+	combine_paths.c\
+	debug.c\
 	free.c
 
 LEMIN_OBJ = ${LEMIN_SRCS:c=o}

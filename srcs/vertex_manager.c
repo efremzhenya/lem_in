@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 02:13:50 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/23 22:53:01 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/01 21:30:32 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_vertex	*new_vertex(char *name, size_t index, int x, int y)
 	vertex->index = index;
 	vertex->x = x;
 	vertex->y = y;
+	vertex->splited = 0;
 	vertex->next = NULL;
 	vertex->prev = NULL;
 	return (vertex);

@@ -6,9 +6,11 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:40:54 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/26 23:54:38 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/27 20:27:23 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//Черновик!
 
 #include "../includes/lem-in.h"
 
@@ -21,6 +23,7 @@ int		first_find_path(t_lemin **lemin)
 	bfs_algorithm(lemin, &bfs);
 	free_bfs(&bfs);
 	clear_queue(&(*lemin)->bfs_queue);
+
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 22:59:10 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/25 21:24:53 by lseema           ###   ########.fr       */
+/*   Updated: 2020/11/28 15:32:26 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,7 @@ int		parse_line(char *line, t_lemin **lemin, t_vertex **rooms)
 		if (!(*lemin)->start_room || !(*lemin)->end_room)
 			return (0);
 		if (!((*lemin)->adj))
-		{
-			if (!((*lemin)->adj = (t_adj **)malloc(sizeof(t_adj *)
-				* (*lemin)->rooms)))
-				return (0);
-			while (i < (*lemin)->rooms)
-			{
-				(*lemin)->adj[i] = new_adj(i);
-				i++;
-			}
-		}
+			init_adj(rooms, lemin);
 		return parse_link(line, lemin, rooms);
 	}
 	return (1);
