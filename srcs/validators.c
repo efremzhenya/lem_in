@@ -6,11 +6,11 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 23:37:07 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 14:35:38 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:03:13 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
 size_t		ft_chrcount(char *line, char c)
 {
@@ -23,10 +23,10 @@ size_t		ft_chrcount(char *line, char c)
 			count++;
 		line++;
 	}
-	return count;
+	return (count);
 }
 
-int		valid_int(char *argv)
+int			valid_int(char *argv)
 {
 	long long	res;
 	int			i;
@@ -43,7 +43,7 @@ int		valid_int(char *argv)
 	return (1);
 }
 
-int		valid_positive_int(char *argv)
+int			valid_positive_int(char *argv)
 {
 	long long	res;
 	int			i;

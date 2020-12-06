@@ -6,18 +6,17 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 04:36:33 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 01:15:41 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:03:05 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
 void	print_lines(t_line **lines)
 {
 	t_line *tail;
 
 	tail = *lines;
-
 	while (tail && tail->next)
 	{
 		ft_putstr(tail->value);

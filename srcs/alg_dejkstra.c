@@ -6,11 +6,11 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 20:33:18 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/01 20:51:10 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:02:07 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
 void	dejkstra_main(t_lemin **lemin, t_vertex **vertexes)
 {
@@ -60,7 +60,7 @@ void	dejkstra_main(t_lemin **lemin, t_vertex **vertexes)
 			if (neighbor->next)
 				neighbor = neighbor->next;
 			else
-				break;
+				break ;
 		}
 		min_set = find_min_in_set(&set);
 		room = min_set ? min_set->room : NULL;

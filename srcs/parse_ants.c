@@ -6,11 +6,11 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 23:47:47 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/22 14:35:56 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:02:41 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
 int		parse_ants(char *line, t_lemin **lemin)
 {

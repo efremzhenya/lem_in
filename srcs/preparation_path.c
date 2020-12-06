@@ -6,11 +6,11 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 15:21:14 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 01:16:57 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:03:01 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
 t_path		*reverse_finded_path(t_lemin **lemin)
 {
@@ -33,7 +33,6 @@ t_path		*reverse_finded_path(t_lemin **lemin)
 	return (path);
 }
 
-//TODO: тестируй
 size_t		result_steps_count(t_lemin **lemin, t_path **paths)
 {
 	size_t		steps;
@@ -44,7 +43,7 @@ size_t		result_steps_count(t_lemin **lemin, t_path **paths)
 
 	steps = 0;
 	ants = (*lemin)->ants;
-	get_array_of_paths_lengths(lengths, (*lemin)->paths_count + 1, paths);
+	get_sorted_paths_lengths(lengths, (*lemin)->paths_count + 1, paths, NULL);
 	calc_koefs(koef, (*lemin)->paths_count + 1, lengths);
 	while (ants)
 	{
@@ -55,14 +54,15 @@ size_t		result_steps_count(t_lemin **lemin, t_path **paths)
 			if (ants > koef[i])
 				ants--;
 			if (!ants)
-				break;
+				break ;
 			i++;
 		}
 	}
-	return steps += (lengths[i] - 1) - 1;
+	return (steps += (lengths[i] - 1) - 1);
 }
 
-void		get_array_of_paths_lengths(size_t lengths[], size_t path_count, t_path **paths)
+void		get_sorted_paths_lengths(size_t lens[],
+	size_t path_count, t_path **paths, t_vertex **path_with_idexes)
 {
 	size_t	i;
 	t_path	*path;
@@ -71,79 +71,46 @@ void		get_array_of_paths_lengths(size_t lengths[], size_t path_count, t_path **p
 	path = *paths;
 	while (i < path_count)
 	{
-		lengths[i++] = path->length;
+		lens[i++] = path->length;
 		if (path->next)
 			path = path->next;
 	}
-	insertionSort(lengths, path_count);
+	insert_sort_mod(lens, path_count, path_with_idexes, 0);
 }
 
-void insertionSort(size_t arr[], size_t n)
+void		insert_sort_mod(size_t arr[], size_t n, t_vertex **paths, size_t i)
 {
-    size_t i, j, min_idx;
-	size_t temp = 0;
+	size_t		j;
+	size_t		min_idx;
+	size_t		temp;
+	t_vertex	*temp_vertex;
 
-    // One by one move boundary of unsorted subarray
-    for (i = 0; i < n-1; i++)
-    {
-        // Find the minimum element in unsorted array
-        min_idx = i;
-        for (j = i+1; j < n; j++)
-          if (arr[j] < arr[min_idx])
-            min_idx = j;
-
-        // Swap the found minimum element with the first element
-		temp = arr[min_idx];
-		arr[min_idx] = arr[i];
-		arr[i] = temp;
-    }
-}
-
-void		sort_paths_and_lengths(size_t lengths[], size_t path_count, t_path **paths, t_vertex **path_with_idexes)
-{
-	size_t	i;
-	t_path	*path;
-
-	i = 0;
-	path = *paths;
-	while (i < path_count)
+	while (i < n - 1)
 	{
-		lengths[i++] = path->length;
-		if (path->next)
-			path = path->next;
-	}
-	insertionSort_two_array(lengths, path_count, path_with_idexes);
-}
-
-void		insertionSort_two_array(size_t arr[], size_t n, t_vertex **paths)
-{
-    size_t i, j, min_idx;
-	size_t temp = 0;
-	t_vertex *temp_vertex;
-
-    // One by one move boundary of unsorted subarray
-    for (i = 0; i < n-1; i++)
-    {
-        // Find the minimum element in unsorted array
-        min_idx = i;
-        for (j = i+1; j < n; j++)
-          if (arr[j] < arr[min_idx])
-            min_idx = j;
-
-        // Swap the found minimum element with the first element
+		min_idx = i;
+		j = i + 1;
+		while (j < n)
+		{
+			if (arr[j] < arr[min_idx])
+				min_idx = j;
+			j++;
+		}
 		temp = arr[min_idx];
-		temp_vertex = paths[min_idx];
 		arr[min_idx] = arr[i];
-		paths[min_idx] = paths[i];
-		arr[i] = temp;
-		paths[i] = temp_vertex;
-    }
+		arr[i++] = temp;
+		if (paths)
+		{
+			temp_vertex = paths[min_idx];
+			paths[min_idx] = paths[--i];
+			paths[i++] = temp_vertex;
+		}
+	}
 }
 
-void	calc_koefs(int koef[], size_t count, size_t lengths[])
+void		calc_koefs(int koef[], size_t count, size_t lengths[])
 {
 	size_t	i;
-	size_t 	j;
+	size_t	j;
 
 	j = 0;
 	while (j < count)

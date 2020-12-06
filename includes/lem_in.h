@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.h                                           :+:      :+:    :+:   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:41:38 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 01:18:31 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:00:48 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,12 @@
 # define ROOMS 1
 # define LINKS 2
 
-
 typedef struct				s_ant
 {
 	size_t					path_index;
 	size_t					room_index;
 	unsigned int			is_active:1;
 }							t_ant;
-
-typedef struct 				s_bfs
-{
-	unsigned int			*used;
-	size_t					*parent;
-	size_t					*distance;
-}							t_bfs;
-
-// typedef struct				s_path
-// {
-// 	struct s_room			*room;
-// 	struct s_path			*next;
-// }							t_path;
 
 typedef struct				s_path_room
 {
@@ -74,7 +60,6 @@ typedef struct				s_adj
 {
 	size_t					index;
 	struct s_vertex			*room;
-	struct s_adj			*next;		//используется толко в очереди
 	t_ilist					*links;
 }							t_adj;
 
@@ -118,11 +103,9 @@ typedef struct				s_lemin
 	unsigned int			step:2;
 	unsigned int			next_is_start:1;
 	unsigned int			next_is_end:1;
-	t_queue					*bfs_queue;
 	t_path					*paths;
 	size_t					paths_count;
 	size_t					result_steps_count;
-	unsigned int			need_free_paths;
 }							t_lemin;
 
 typedef struct				s_line
@@ -162,7 +145,7 @@ size_t						ft_chrcount(char *line, char c);
 int							valid_int(char *argv);
 
 //list
-t_ilist						*new_ilist_elem(size_t index, int weight, int is_blocked);
+t_ilist						*new_ilist(size_t index, int weight, int is_blocked);
 int							add_ilist(t_ilist **list, t_ilist *elem);
 int							is_link_exists(size_t ind1, size_t ind2, t_adj **row, size_t num);
 t_ilist						*find_link_by_index(t_ilist **ilist, size_t index);
@@ -181,18 +164,6 @@ int							free_str_arr(char **temp);
 void						free_adj(t_adj **row, size_t count);
 void						free_path_rooms(t_path_room **path_rooms);
 
-//queue
-int							new_queue(t_queue **queue);
-void						enqueue(t_queue **queue, t_adj *adj);
-t_adj						*dequeue(t_queue **queue);
-void						clear_queue(t_queue **queue);
-
-//bfs
-int							first_find_path(t_lemin **lemin);
-int							init_bfs(t_lemin **lemin, t_bfs **bfs);
-int							bfs_algorithm(t_lemin **lemin, t_bfs **bfs);
-void						free_bfs(t_bfs **bfs);
-
 //path
 t_path						*new_path();
 int							add_path(t_path **paths, t_path *path);
@@ -202,7 +173,7 @@ void						free_paths(t_path **paths);
 int							push_path_room(t_path_room **path_rooms, t_path_room *path_room);
 t_path						*reverse_finded_path(t_lemin **lemin);
 size_t						result_steps_count(t_lemin **lemin, t_path **paths);
-void						get_array_of_paths_lengths(size_t lengths[], size_t path_count, t_path **paths);
+void						get_sorted_paths_lengths(size_t lens[], size_t path_count, t_path **paths, t_vertex **path_with_idexes);
 void						calc_koefs(int koef[], size_t count, size_t lengths[]);
 void						free_last_path(t_path **paths);
 
@@ -219,7 +190,7 @@ void						dejkstra_main(t_lemin **lemin, t_vertex **vertexes);
 void						dejkstra_init(t_vertex **vertexes, t_lemin **lemin);
 
 //suurballe
-void						suurballe_main(t_lemin **lemin, t_vertex **rooms);
+void						suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps);
 void						split_rooms_on_paths(t_lemin **lemin);
 void						split_and_set_weight(t_path_room **path_rooms, t_lemin **lemin);
 int							find_common_links(t_lemin **lemin, t_path *path, short int **matrix);
@@ -228,18 +199,13 @@ short int					combine_paths(t_lemin **lemin, t_path *path, short int **matrix);
 short int					**init_adj_matrix(t_lemin **lemin);
 void						free_adj_matrix(short int **matrix, size_t count);
 void						init_rooms(t_lemin **lemin, t_vertex **rooms);
-void 						insertionSort(size_t arr[], size_t n);
+void						insert_sort_mod(size_t arr[], size_t n, t_vertex **paths, size_t i);
 
-//final
+//ants
 void						ants_go(t_lemin **lemin, t_vertex **paths, int ants, size_t i);
 t_vertex					**indexing_paths(t_lemin **lemin, size_t i, size_t j);
-void						sort_paths_and_lengths(size_t lengths[], size_t path_count, t_path **paths, t_vertex **path_with_idexes);
-void						insertionSort_two_array(size_t arr[], size_t n, t_vertex **paths);
 void						ants_init(t_ant **ants, int count);
 int							move_ants(t_lemin **lemin, t_ant **ants, t_vertex **paths, int i);
 void						free_ants(t_lemin **lemin, t_ant **ants, t_vertex **paths);
-
-//debug
-void						print_adj_list(t_lemin **lemin);
 
 #endif

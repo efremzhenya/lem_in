@@ -6,13 +6,13 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 06:01:54 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/01 20:56:26 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:02:31 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
-t_ilist		*new_ilist_elem(size_t index, int weight, int is_blocked)
+t_ilist		*new_ilist(size_t index, int weight, int is_blocked)
 {
 	t_ilist *elem;
 
@@ -28,6 +28,7 @@ t_ilist		*new_ilist_elem(size_t index, int weight, int is_blocked)
 int			add_ilist(t_ilist **list, t_ilist *elem)
 {
 	t_ilist	*tail;
+
 	if (!list || !elem)
 		return (0);
 	tail = *list;
@@ -40,16 +41,16 @@ int			add_ilist(t_ilist **list, t_ilist *elem)
 t_adj	*new_adj(t_vertex *room, size_t index)
 {
 	t_adj *adj;
+
 	if (!(adj = (t_adj *)malloc(sizeof(t_adj))))
 		return (NULL);
 	adj->index = index;
 	adj->room = room;
 	adj->links = NULL;
-	adj->next = NULL;
 	return (adj);
 }
 
-int		init_adj(t_vertex **vertexes, t_lemin **lemin)
+int			init_adj(t_vertex **vertexes, t_lemin **lemin)
 {
 	t_vertex	*rooms;
 	size_t		i;
@@ -72,7 +73,7 @@ int		init_adj(t_vertex **vertexes, t_lemin **lemin)
 
 int			is_link_exists(size_t ind1, size_t ind2, t_adj **row, size_t num)
 {
-	size_t 	i;
+	size_t	i;
 	t_ilist	*tail;
 
 	i = 0;
@@ -91,7 +92,7 @@ int			is_link_exists(size_t ind1, size_t ind2, t_adj **row, size_t num)
 			}
 			if (tail->index == ((row[i]->index == ind1) ? ind2 : ind1))
 				return (1);
-			break;
+			break ;
 		}
 		else
 			i++;

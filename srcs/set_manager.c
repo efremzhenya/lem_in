@@ -6,11 +6,11 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 00:00:02 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/28 16:31:19 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:03:09 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
 t_set		*new_set_elem(t_vertex *room)
 {
@@ -91,7 +91,7 @@ t_set		*find_min_in_set(t_set **set)
 	t_set	*tail;
 
 	if (!*set)
-		return NULL;
+		return (NULL);
 	min = *set;
 	tail = *set;
 	while (tail->next)

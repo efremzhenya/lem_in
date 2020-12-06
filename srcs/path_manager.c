@@ -6,13 +6,13 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 23:07:24 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/03 22:54:49 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:02:57 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
-t_path		*new_path()
+t_path		*new_path(void)
 {
 	t_path *path;
 
@@ -43,7 +43,7 @@ void		free_last_path(t_path **paths)
 	t_path	*tmp;
 
 	if (!*paths)
-		return;
+		return ;
 	tail = *paths;
 	if (!tail->next)
 	{

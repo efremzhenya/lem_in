@@ -6,35 +6,34 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 20:33:22 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/02 22:55:40 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:02:13 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
-void		suurballe_main(t_lemin **lemin, t_vertex **rooms)
+void		suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps)
 {
-	t_path		*path;
-	size_t 		steps;
+	t_path		*new_path;
 	short int	**adj_matrix;
 
-	while ((size_t)(*lemin)->ants > (*lemin)->paths_count)
+	while ((size_t)(*lemin)->ants > (*lemin)->paths_count && steps)
 	{
 		init_rooms(lemin, rooms);
 		split_rooms_on_paths(lemin);
 		dejkstra_main(lemin, rooms);
-		if (!(path = reverse_finded_path(lemin)))
+		if (!(new_path = reverse_finded_path(lemin)))
 			return ;
 		if (!(*lemin)->paths_count)
 		{
-			(*lemin)->paths = path;
+			(*lemin)->paths = new_path;
 			steps = result_steps_count(lemin, &(*lemin)->paths);
 		}
 		else
 		{
 			if (!(adj_matrix = init_adj_matrix(lemin)))
 				return ;
-			steps = find_common_links(lemin, path, adj_matrix);
+			steps = find_common_links(lemin, new_path, adj_matrix);
 			free_adj_matrix(adj_matrix, (*lemin)->rooms);
 		}
 		if (steps > 0)
@@ -42,8 +41,6 @@ void		suurballe_main(t_lemin **lemin, t_vertex **rooms)
 			(*lemin)->paths_count++;
 			(*lemin)->result_steps_count = steps;
 		}
-		else
-			return;
 	}
 }
 
@@ -96,9 +93,10 @@ void		split_and_set_weight(t_path_room **path_rooms, t_lemin **lemin)
 	{
 		if (path_room->room != (*lemin)->start_room)
 			path_room->room->splited = 1;
-		find_link_by_index(&(*lemin)->adj[path_room->room->index]->links, path_room->next->room->index)->is_blocked = 1;
-		find_link_by_index(&(*lemin)->adj[path_room->next->room->index]->links, path_room->room->index)->weight = -1;
+		find_link_by_index(&(*lemin)->adj[path_room->room->index]->links,
+			path_room->next->room->index)->is_blocked = 1;
+		find_link_by_index(&(*lemin)->adj[path_room->next->room->index]->links,
+			path_room->room->index)->weight = -1;
 		path_room = path_room->next;
 	}
 }
-

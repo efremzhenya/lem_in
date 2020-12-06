@@ -6,13 +6,13 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 22:59:10 by lseema            #+#    #+#             */
-/*   Updated: 2020/11/28 15:32:26 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:02:44 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
-size_t		parse_lines(t_line **lines, t_lemin **lemin, t_vertex **rooms)
+size_t	parse_lines(t_line **lines, t_lemin **lemin, t_vertex **rooms)
 {
 	char	*line;
 	size_t	count;
@@ -32,7 +32,7 @@ size_t		parse_lines(t_line **lines, t_lemin **lemin, t_vertex **rooms)
 		}
 		count++;
 	}
-	return count;
+	return (count);
 }
 
 int		parse_line(char *line, t_lemin **lemin, t_vertex **rooms)
@@ -41,7 +41,7 @@ int		parse_line(char *line, t_lemin **lemin, t_vertex **rooms)
 
 	i = 0;
 	if ((*lemin)->step == ANT)
-		return parse_ants(line, lemin);
+		return (parse_ants(line, lemin));
 	else if ((*lemin)->step == ROOMS)
 		if (!parse_room_type(line, lemin, rooms))
 			(*lemin)->step = LINKS;
@@ -51,12 +51,12 @@ int		parse_line(char *line, t_lemin **lemin, t_vertex **rooms)
 			return (0);
 		if (!((*lemin)->adj))
 			init_adj(rooms, lemin);
-		return parse_link(line, lemin, rooms);
+		return (parse_link(line, lemin, rooms));
 	}
 	return (1);
 }
 
-char	*read_next_line()
+char	*read_next_line(void)
 {
 	char	*line;
 	int		res;
@@ -65,14 +65,14 @@ char	*read_next_line()
 	while ((res = get_next_line(0, &line)) > 0)
 	{
 		if (!ft_strcmp(line, "##start") || !ft_strcmp(line, "##end"))
-			return line;
+			return (line);
 		else if (*line && (*line == '#'))
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		else
-			return line;
+			return (line);
 	}
-	return NULL;
+	return (NULL);
 }

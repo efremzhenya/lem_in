@@ -6,14 +6,13 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 23:39:27 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/04 23:46:15 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:02:23 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
-//TODO: как?
-int		find_common_links(t_lemin **lemin, t_path *path, short int **matrix)
+int			find_common_links(t_lemin **lemin, t_path *path, short int **matrix)
 {
 	t_path		*new_paths;
 	t_path		*temp;
@@ -54,42 +53,41 @@ int		find_common_links(t_lemin **lemin, t_path *path, short int **matrix)
 
 t_path		*create_new_path(t_lemin **lemin, t_path *path, short int **matrix)
 {
-		t_path			*result;
-		size_t			j;
-		size_t			i;
+	t_path			*result;
+	size_t			j;
+	size_t			i;
 
-		result = new_path();
-		result->rooms = new_path_room((*lemin)->start_room);
-		result->length++;
-		add_path_room(&result->rooms, new_path_room(path->rooms->next->room));
-		result->length++;
-		i = path->rooms->next->room->index;
-		while (i != (*lemin)->end_room->index)
+	result = new_path();
+	result->rooms = new_path_room((*lemin)->start_room);
+	result->length++;
+	add_path_room(&result->rooms, new_path_room(path->rooms->next->room));
+	result->length++;
+	i = path->rooms->next->room->index;
+	while (i != (*lemin)->end_room->index)
+	{
+		j = 0;
+		while (j < (*lemin)->rooms)
 		{
-			j = 0;
-			while (j < (*lemin)->rooms)
+			if (matrix[i][j] && j != result->rooms->room->index)
 			{
-				if (matrix[i][j] && j != result->rooms->room->index)
-				{
-					matrix[i][j] = 0;
-					matrix[j][i] = 0;
-					add_path_room(&result->rooms, new_path_room((*lemin)->adj[j]->room));
-					i = j;
-					result->length++;
-					break;
-				}
-				j++;
+				matrix[i][j] = 0;
+				matrix[j][i] = 0;
+				add_path_room(&result->rooms, new_path_room((*lemin)->adj[j]->room));
+				i = j;
+				result->length++;
+				break ;
 			}
+			j++;
 		}
-		//add_path_room(&result->rooms, new_path_room((*lemin)->end_room));
-		return result;
+	}
+	return (result);
 }
 
 short int	combine_paths(t_lemin **lemin, t_path *path, short int **matrix)
 {
-	t_path 			*temp;
-	t_path_room 	*path_rooms;
-	short int		is_combine_arc;
+	t_path		*temp;
+	t_path_room	*path_rooms;
+	short int	is_combine_arc;
 
 	is_combine_arc = 0;
 	temp = (*lemin)->paths;
@@ -115,10 +113,10 @@ short int	combine_paths(t_lemin **lemin, t_path *path, short int **matrix)
 			is_combine_arc++;
 		path_rooms = path_rooms->next;
 	}
-	return is_combine_arc;
+	return (is_combine_arc);
 }
 
-short int		**init_adj_matrix(t_lemin **lemin)
+short int	**init_adj_matrix(t_lemin **lemin)
 {
 	size_t		i;
 	size_t		j;
@@ -136,7 +134,7 @@ short int		**init_adj_matrix(t_lemin **lemin)
 			matrix[i][j++] = 0;
 		i++;
 	}
-	return matrix;
+	return (matrix);
 }
 
 void		free_adj_matrix(short int **matrix, size_t count)

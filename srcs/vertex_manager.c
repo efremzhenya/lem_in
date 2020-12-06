@@ -6,11 +6,11 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 02:13:50 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/01 21:30:32 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/06 18:07:35 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem-in.h"
+#include "../includes/lem_in.h"
 
 t_vertex	*new_vertex(char *name, size_t index, int x, int y)
 {
@@ -28,7 +28,7 @@ t_vertex	*new_vertex(char *name, size_t index, int x, int y)
 	return (vertex);
 }
 
-int		add_vertex(t_vertex **rooms, t_vertex *vertex)
+int			add_vertex(t_vertex **rooms, t_vertex *vertex)
 {
 	t_vertex	*tail;
 
@@ -43,7 +43,7 @@ int		add_vertex(t_vertex **rooms, t_vertex *vertex)
 	return (1);
 }
 
-int		is_room_dup(t_vertex **rooms, char *name, int x, int y)
+int			is_room_dup(t_vertex **rooms, char *name, int x, int y)
 {
 	t_vertex	*tail;
 
@@ -59,7 +59,7 @@ int		is_room_dup(t_vertex **rooms, char *name, int x, int y)
 	return (!ft_strcmp(tail->name, name) || (tail->x == x && tail->y == y));
 }
 
-int		is_room_contain(t_vertex **rooms, char *name)
+int			is_room_contain(t_vertex **rooms, char *name)
 {
 	t_vertex	*tail;
 
@@ -102,5 +102,5 @@ t_vertex	*get_last_added(t_vertex **rooms)
 	tail = *rooms;
 	while (tail->next)
 		tail = tail->next;
-	return tail;
+	return (tail);
 }
