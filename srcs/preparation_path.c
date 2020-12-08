@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 15:21:14 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:03:01 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/08 19:21:23 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ size_t		result_steps_count(t_lemin **lemin, t_path **paths)
 	int			ants;
 
 	steps = 0;
+	i = 0;
 	ants = (*lemin)->ants;
 	get_sorted_paths_lengths(lengths, (*lemin)->paths_count + 1, paths, NULL);
 	calc_koefs(koef, (*lemin)->paths_count + 1, lengths);
@@ -58,7 +59,7 @@ size_t		result_steps_count(t_lemin **lemin, t_path **paths)
 			i++;
 		}
 	}
-	return (steps += (lengths[i] - 1) - 1);
+	return (steps + (lengths[i] - 1) - 1);
 }
 
 void		get_sorted_paths_lengths(size_t lens[],

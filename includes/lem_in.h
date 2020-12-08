@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:41:38 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:00:48 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/08 19:33:04 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ typedef struct				s_lemin
 	struct s_vertex			*end_room;
 	struct s_adj			**adj;
 	struct s_set			*set;
-	unsigned int			step:2;
-	unsigned int			next_is_start:1;
-	unsigned int			next_is_end:1;
+	int						step;
+	int						next_is_start;
+	int						next_is_end;
 	t_path					*paths;
 	size_t					paths_count;
 	size_t					result_steps_count;

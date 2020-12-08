@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:42:32 by lseema            #+#    #+#             */
-/*   Updated: 2020/02/26 19:41:59 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/07 21:46:25 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <sys/types.h>
 # include <unistd.h>
 
+#include <stdio.h>  //удалить!!
+#include <stdint.h> //удалить!!
 typedef	struct	s_list
 {
 	void			*content;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   alg_suurballe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/27 20:33:22 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:02:13 by lseema           ###   ########.fr       */
+/*   Created: 2020/12/07 23:29:16 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/08 19:21:23 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-void		suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps)
+void			suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps)
 {
 	t_path		*new_path;
 	short int	**adj_matrix;
@@ -36,7 +36,7 @@ void		suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps)
 			steps = find_common_links(lemin, new_path, adj_matrix);
 			free_adj_matrix(adj_matrix, (*lemin)->rooms);
 		}
-		if (steps > 0)
+		if (steps > 0) //в каких случаех steps может быть равен 0?
 		{
 			(*lemin)->paths_count++;
 			(*lemin)->result_steps_count = steps;
@@ -44,7 +44,7 @@ void		suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps)
 	}
 }
 
-void		init_rooms(t_lemin **lemin, t_vertex **rooms)
+void			init_rooms(t_lemin **lemin, t_vertex **rooms)
 {
 	t_vertex	*vertex;
 	size_t		i;
@@ -84,9 +84,9 @@ void		split_rooms_on_paths(t_lemin **lemin)
 	split_and_set_weight(&path->rooms, lemin);
 }
 
-void		split_and_set_weight(t_path_room **path_rooms, t_lemin **lemin)
+void			split_and_set_weight(t_path_room **path_rooms, t_lemin **lemin)
 {
-	t_path_room *path_room;
+	t_path_room	*path_room;
 
 	path_room = *path_rooms;
 	while (path_room->next)

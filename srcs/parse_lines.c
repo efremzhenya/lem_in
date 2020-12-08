@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parse_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/20 22:59:10 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:02:44 by lseema           ###   ########.fr       */
+/*   Created: 2020/12/08 18:53:25 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/08 19:34:40 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-size_t	parse_lines(t_line **lines, t_lemin **lemin, t_vertex **rooms)
+size_t		parse_lines(t_line **lines, t_lemin **lemin, t_vertex **rooms)
 {
 	char	*line;
 	size_t	count;
 
 	count = 0;
+	freopen("map.txt", "r", stdin);
 	while ((line = read_next_line()) != NULL)
 	{
 		if (parse_line(line, lemin, rooms))
@@ -35,11 +36,8 @@ size_t	parse_lines(t_line **lines, t_lemin **lemin, t_vertex **rooms)
 	return (count);
 }
 
-int		parse_line(char *line, t_lemin **lemin, t_vertex **rooms)
+int			parse_line(char *line, t_lemin **lemin, t_vertex **rooms)
 {
-	size_t i;
-
-	i = 0;
 	if ((*lemin)->step == ANT)
 		return (parse_ants(line, lemin));
 	else if ((*lemin)->step == ROOMS)
@@ -56,21 +54,16 @@ int		parse_line(char *line, t_lemin **lemin, t_vertex **rooms)
 	return (1);
 }
 
-char	*read_next_line(void)
+char		*read_next_line(void)
 {
 	char	*line;
-	int		res;
 
 	line = NULL;
-	while ((res = get_next_line(0, &line)) > 0)
+	while (get_next_line(0, &line) > 0)
 	{
-		if (!ft_strcmp(line, "##start") || !ft_strcmp(line, "##end"))
-			return (line);
-		else if (*line && (*line == '#'))
-		{
+		if (*line && (*line == '#') && ft_strcmp(line, "##start") != 0 &&
+				ft_strcmp(line, "##end") != 0)
 			free(line);
-			continue ;
-		}
 		else
 			return (line);
 	}

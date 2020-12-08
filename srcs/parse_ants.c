@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_ants.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 23:47:47 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:02:41 by lseema           ###   ########.fr       */
+/*   Created: 2020/12/08 19:46:06 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/08 19:46:06 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 int		parse_ants(char *line, t_lemin **lemin)
 {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_room.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/20 22:45:27 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:02:53 by lseema           ###   ########.fr       */
+/*   Created: 2020/12/08 20:13:27 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/08 20:13:27 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-int		parse_room_type(char *line, t_lemin **lemin, t_vertex **rooms)
+int			parse_room_type(char *line, t_lemin **lemin, t_vertex **rooms)
 {
 	if ((*lemin)->next_is_start)
 	{
@@ -38,7 +38,7 @@ int		parse_room_type(char *line, t_lemin **lemin, t_vertex **rooms)
 		return (parse_room(line, lemin, rooms));
 }
 
-int		parse_room(char *line, t_lemin **lemin, t_vertex **rooms)
+int			parse_room(char *line, t_lemin **lemin, t_vertex **rooms)
 {
 	char	**parts;
 	int		x;

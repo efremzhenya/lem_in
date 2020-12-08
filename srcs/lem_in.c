@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/18 20:41:41 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:07:53 by lseema           ###   ########.fr       */
+/*   Created: 2020/12/08 18:51:00 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/08 19:21:23 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-int			print_error(void)
+int				print_error(void)
 {
 	ft_putendl_fd("ERROR", 2);
 	return (0);
 }
 
-int			main(void)
+int				main(void)
 {
 	t_lemin		*lemin;
 	t_line		*lines;
@@ -47,7 +47,7 @@ int			main(void)
 	return (0);
 }
 
-int			init_lemin(t_lemin **lemin)
+int				init_lemin(t_lemin **lemin)
 {
 	if (!(*lemin = (t_lemin*)malloc(sizeof(t_lemin))))
 		return (0);
@@ -69,7 +69,7 @@ int			init_lemin(t_lemin **lemin)
 	return (1);
 }
 
-t_vertex	**indexing_paths(t_lemin **lemin, size_t i, size_t j)
+t_vertex		**indexing_paths(t_lemin **lemin, size_t i, size_t j)
 {
 	t_vertex	**indexed_paths;
 	t_path		*path;
