@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:41:38 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/08 19:33:04 by jpasty           ###   ########.ru       */
+/*   Updated: 2020/12/10 21:25:05 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,8 @@ void						suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps);
 void						split_rooms_on_paths(t_lemin **lemin);
 void						split_and_set_weight(t_path_room **path_rooms, t_lemin **lemin);
 int							find_common_links(t_lemin **lemin, t_path *path, short int **matrix);
-t_path						*create_new_path(t_lemin **lemin, t_path *path, short int **matrix);
+t_path						*create_new_path(t_lemin **lemin, t_path *path,
+											short int **matrix, size_t index);
 short int					combine_paths(t_lemin **lemin, t_path *path, short int **matrix);
 short int					**init_adj_matrix(t_lemin **lemin);
 void						free_adj_matrix(short int **matrix, size_t count);

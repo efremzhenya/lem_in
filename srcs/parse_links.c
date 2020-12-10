@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_links.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 06:01:23 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/08 21:56:53 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/08 22:48:15 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/10 22:37:26 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int 		no_links_exist(size_t index1, size_t index2, t_lemin ***lemin)
+int			no_links_exist(size_t index1, size_t index2, t_lemin ***lemin)
 {
 	if (!is_link_exists(index1, index2, (*(*lemin))->adj, (*(*lemin))->rooms))
 	{
@@ -70,4 +70,21 @@ t_ilist		*find_link_by_index(t_ilist **ilist, size_t index)
 		tail = tail->next;
 	}
 	return (tail->index == index ? tail : NULL);
+}
+
+void		free_links(t_ilist **links)
+{
+	t_ilist	*tail;
+
+	if (*links)
+	{
+		tail = *links;
+		while (tail->next)
+		{
+			*links = tail;
+			tail = tail->next;
+			free(*links);
+		}
+		free(tail);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 23:29:16 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/08 19:21:23 by jpasty           ###   ########.ru       */
+/*   Updated: 2020/12/10 22:37:30 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,14 @@ void			split_and_set_weight(t_path_room **path_rooms, t_lemin **lemin)
 			path_room->room->index)->weight = -1;
 		path_room = path_room->next;
 	}
+}
+
+void		free_adj_matrix(short int **matrix, size_t count)
+{
+	size_t i;
+
+	i = 0;
+	while (i < count)
+		free(matrix[i++]);
+	free(matrix);
 }

@@ -6,13 +6,13 @@
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 20:13:27 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/08 20:13:27 by jpasty           ###   ########.fr       */
+/*   Updated: 2020/12/10 22:37:26 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			parse_room_type(char *line, t_lemin **lemin, t_vertex **rooms)
+int				parse_room_type(char *line, t_lemin **lemin, t_vertex **rooms)
 {
 	if ((*lemin)->next_is_start)
 	{
@@ -38,11 +38,11 @@ int			parse_room_type(char *line, t_lemin **lemin, t_vertex **rooms)
 		return (parse_room(line, lemin, rooms));
 }
 
-int			parse_room(char *line, t_lemin **lemin, t_vertex **rooms)
+int				parse_room(char *line, t_lemin **lemin, t_vertex **rooms)
 {
-	char	**parts;
-	int		x;
-	int		y;
+	char		**parts;
+	int			x;
+	int			y;
 
 	if (ft_chrcount(line, ' ') != 2 || ft_chrcount(line, '-'))
 		return (0);
@@ -60,4 +60,23 @@ int			parse_room(char *line, t_lemin **lemin, t_vertex **rooms)
 			rooms, new_vertex(ft_strdup(parts[0]), (*lemin)->rooms++, x, y));
 	free_str_arr(parts);
 	return (1);
+}
+
+void			free_rooms(t_vertex **rooms)
+{
+	t_vertex	*tail;
+
+	if (*rooms)
+	{
+		tail = *rooms;
+		while (tail->next)
+		{
+			*rooms = tail;
+			tail = tail->next;
+			free((*rooms)->name);
+			free(*rooms);
+		}
+		free(tail->name);
+		free(tail);
+	}
 }
