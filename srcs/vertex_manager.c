@@ -6,11 +6,11 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 02:13:50 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:07:35 by lseema           ###   ########.fr       */
+/*   Updated: 2020/12/11 21:33:30 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 t_vertex	*new_vertex(char *name, size_t index, int x, int y)
 {
@@ -73,24 +73,6 @@ int			is_room_contain(t_vertex **rooms, char *name)
 		tail = tail->next;
 	}
 	return (!ft_strcmp(name, tail->name));
-}
-
-size_t		get_room_index(char *name, t_vertex **rooms)
-{
-	t_vertex	*tail;
-
-	if (!rooms)
-		return (-1);
-	tail = *rooms;
-	while (tail->next)
-	{
-		if (!ft_strcmp(name, tail->name))
-			return (tail->index);
-		tail = tail->next;
-	}
-	if (!ft_strcmp(name, tail->name))
-		return (tail->index);
-	return (-1);
 }
 
 t_vertex	*get_last_added(t_vertex **rooms)

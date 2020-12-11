@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   path_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 23:07:24 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:02:57 by lseema           ###   ########.fr       */
+/*   Created: 2020/12/11 22:03:29 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/11 22:03:29 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-t_path		*new_path(void)
+t_path			*new_path(void)
 {
-	t_path *path;
+	t_path		*path;
 
 	if (!(path = (t_path *)malloc(sizeof(t_path))))
 		return (NULL);
@@ -24,9 +24,9 @@ t_path		*new_path(void)
 	return (path);
 }
 
-int			add_path(t_path **paths, t_path *path)
+int				add_path(t_path **paths, t_path *path)
 {
-	t_path	*tail;
+	t_path		*tail;
 
 	if (!paths || !path)
 		return (0);
@@ -37,10 +37,10 @@ int			add_path(t_path **paths, t_path *path)
 	return (1);
 }
 
-void		free_last_path(t_path **paths)
+void			free_last_path(t_path **paths)
 {
-	t_path	*tail;
-	t_path	*tmp;
+	t_path		*tail;
+	t_path		*tmp;
 
 	if (!*paths)
 		return ;
@@ -61,9 +61,9 @@ void		free_last_path(t_path **paths)
 	tmp->next = NULL;
 }
 
-t_path_room	*new_path_room(t_vertex *room)
+t_path_room		*new_path_room(t_vertex *room)
 {
-	t_path_room *new_path_room;
+	t_path_room	*new_path_room;
 
 	if (!(new_path_room = (t_path_room *)malloc(sizeof(t_path_room))))
 		return (NULL);
@@ -72,20 +72,7 @@ t_path_room	*new_path_room(t_vertex *room)
 	return (new_path_room);
 }
 
-int			add_path_room(t_path_room **path_rooms, t_path_room *path_room)
-{
-	t_path_room	*tail;
-
-	if (!path_rooms || !path_room)
-		return (0);
-	tail = *path_rooms;
-	while (tail->next)
-		tail = tail->next;
-	tail->next = path_room;
-	return (1);
-}
-
-int			push_path_room(t_path_room **path_rooms, t_path_room *path_room)
+int				push_path_room(t_path_room **path_rooms, t_path_room *path_room)
 {
 	if (!path_rooms || !path_room)
 		return (0);

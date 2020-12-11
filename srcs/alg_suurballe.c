@@ -36,7 +36,7 @@ void			suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps)
 			steps = find_common_links(lemin, new_path, adj_matrix);
 			free_adj_matrix(adj_matrix, (*lemin)->rooms);
 		}
-		if (steps > 0) //в каких случаех steps может быть равен 0?
+		if (steps > 0)
 		{
 			(*lemin)->paths_count++;
 			(*lemin)->result_steps_count = steps;

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   validators.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 23:37:07 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:03:13 by lseema           ###   ########.fr       */
+/*   Created: 2020/12/11 21:38:07 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/11 21:38:07 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-size_t		ft_chrcount(char *line, char c)
+size_t			ft_chrcount(char *line, char c)
 {
-	size_t	count;
+	size_t		count;
 
 	count = 0;
 	while (*line)
@@ -26,7 +26,7 @@ size_t		ft_chrcount(char *line, char c)
 	return (count);
 }
 
-int			valid_int(char *argv)
+int				valid_int(char *argv)
 {
 	long long	res;
 	int			i;
@@ -43,7 +43,7 @@ int			valid_int(char *argv)
 	return (1);
 }
 
-int			valid_positive_int(char *argv)
+int				valid_positive_int(char *argv)
 {
 	long long	res;
 	int			i;

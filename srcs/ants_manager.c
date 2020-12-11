@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-void		ants_init(t_ant **ants, int count)
+void			ants_init(t_ant **ants, int count)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (i < count)
@@ -26,9 +26,9 @@ void		ants_init(t_ant **ants, int count)
 	}
 }
 
-void	free_ants(t_lemin **lemin, t_ant **ants, t_vertex **paths)
+void			free_ants(t_lemin **lemin, t_ant **ants, t_vertex **paths)
 {
-	size_t i;
+	size_t		i;
 
 	i = 0;
 	if (*ants)
@@ -46,11 +46,11 @@ void	free_ants(t_lemin **lemin, t_ant **ants, t_vertex **paths)
 	}
 }
 
-void		ants_go(t_lemin **lemin, t_vertex **paths, int ants, size_t i)
+void			ants_go(t_lemin **lemin, t_vertex **paths, int ants, size_t i)
 {
-	size_t	lengths[(*lemin)->paths_count];
-	int		koef[(*lemin)->paths_count];
-	t_ant	**ants_info;
+	size_t		lengths[(*lemin)->paths_count];
+	int			koef[(*lemin)->paths_count];
+	t_ant		**ants_info;
 
 	ants_info = (t_ant **)malloc(sizeof(t_ant*) * (*lemin)->ants);
 	ants_init(ants_info, (*lemin)->ants);
@@ -75,7 +75,8 @@ void		ants_go(t_lemin **lemin, t_vertex **paths, int ants, size_t i)
 	free_ants(lemin, ants_info, paths);
 }
 
-int			move_ants(t_lemin **lemin, t_ant **ants, t_vertex **paths, int i)
+int				move_ants(t_lemin **lemin, t_ant **ants,
+							t_vertex **paths, int i)
 {
 	short int	is_any_move;
 

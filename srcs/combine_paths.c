@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   combine_paths.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 23:39:27 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/10 23:32:56 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/11 21:30:05 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/11 21:30:05 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_path		*create_new_path(t_lemin **lemin, t_path *path,
+t_path			*create_new_path(t_lemin **lemin, t_path *path,
 					short int **matrix, size_t index)
 {
-	t_path			*r;
-	size_t			j;
+	t_path		*r;
+	size_t		j;
 
 	r = new_path();
 	r->rooms = new_path_room((*lemin)->start_room);
@@ -42,13 +42,32 @@ t_path		*create_new_path(t_lemin **lemin, t_path *path,
 	return (r);
 }
 
-short int	combine_paths(t_lemin **lemin, t_path *path, short int **matrix)
+static short	how_many_path(t_path_room *path_rooms, short int ***matrix)
 {
-	t_path		*temp;
-	t_path_room	*path_rooms;
 	short int	is_combine_arc;
 
 	is_combine_arc = 0;
+	while (path_rooms->next)
+	{
+		(*matrix)[path_rooms->room->index][path_rooms->next->room->index] =
+				(short)!(*matrix)[path_rooms->room->index]
+								[path_rooms->next->room->index];
+		(*matrix)[path_rooms->next->room->index][path_rooms->room->index] =
+				(short)!(*matrix)[path_rooms->next->room->index]
+								[path_rooms->room->index];
+		if (!(*matrix)[path_rooms->room->index]
+								[path_rooms->next->room->index])
+			is_combine_arc++;
+		path_rooms = path_rooms->next;
+	}
+	return (is_combine_arc);
+}
+
+short int		combine_paths(t_lemin **lemin, t_path *path, short int **matrix)
+{
+	t_path		*temp;
+	t_path_room	*path_rooms;
+
 	temp = (*lemin)->paths;
 	while (temp)
 	{
@@ -62,20 +81,10 @@ short int	combine_paths(t_lemin **lemin, t_path *path, short int **matrix)
 		temp = temp->next;
 	}
 	path_rooms = path->rooms;
-	while (path_rooms->next)
-	{
-		matrix[path_rooms->room->index][path_rooms->next->room->index] =
-			!matrix[path_rooms->room->index][path_rooms->next->room->index];
-		matrix[path_rooms->next->room->index][path_rooms->room->index] =
-			!matrix[path_rooms->next->room->index][path_rooms->room->index];
-		if (!matrix[path_rooms->room->index][path_rooms->next->room->index])
-			is_combine_arc++;
-		path_rooms = path_rooms->next;
-	}
-	return (is_combine_arc);
+	return (how_many_path(path_rooms, &matrix));
 }
 
-short int	**init_adj_matrix(t_lemin **lemin)
+short int		**init_adj_matrix(t_lemin **lemin)
 {
 	size_t		i;
 	size_t		j;

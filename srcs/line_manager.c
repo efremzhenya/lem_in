@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/08 19:45:02 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/10 22:37:26 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/11 22:06:02 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/11 22:06:02 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_line		*new_line(char **value)
 {
-	t_line *line;
+	t_line	*line;
 
 	if (!(line = (t_line *)malloc(sizeof(t_line))))
 		return (NULL);

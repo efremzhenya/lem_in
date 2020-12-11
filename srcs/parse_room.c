@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/08 20:13:27 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/10 22:37:26 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/11 21:34:06 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/11 21:35:28 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,37 @@ int				parse_room(char *line, t_lemin **lemin, t_vertex **rooms)
 		add_vertex(
 			rooms, new_vertex(ft_strdup(parts[0]), (*lemin)->rooms++, x, y));
 	free_str_arr(parts);
+	return (1);
+}
+
+size_t			get_room_index(char *name, t_vertex **rooms)
+{
+	t_vertex	*tail;
+
+	if (!rooms)
+		return (-1);
+	tail = *rooms;
+	while (tail->next)
+	{
+		if (!ft_strcmp(name, tail->name))
+			return (tail->index);
+		tail = tail->next;
+	}
+	if (!ft_strcmp(name, tail->name))
+		return (tail->index);
+	return (-1);
+}
+
+int				add_path_room(t_path_room **path_rooms, t_path_room *path_room)
+{
+	t_path_room	*tail;
+
+	if (!path_rooms || !path_room)
+		return (0);
+	tail = *path_rooms;
+	while (tail->next)
+		tail = tail->next;
+	tail->next = path_room;
 	return (1);
 }
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   preparation_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 15:21:14 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/10 22:37:26 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/11 21:57:34 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/11 21:57:34 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-t_path		*reverse_finded_path(t_lemin **lemin)
+t_path			*reverse_finded_path(t_lemin **lemin)
 {
 	t_vertex	*curr_room;
 	t_path		*path;
@@ -33,7 +33,7 @@ t_path		*reverse_finded_path(t_lemin **lemin)
 	return (path);
 }
 
-size_t		result_steps_count(t_lemin **lemin, t_path **paths)
+size_t			result_steps_count(t_lemin **lemin, t_path **paths)
 {
 	size_t		steps;
 	size_t		i;
@@ -62,11 +62,11 @@ size_t		result_steps_count(t_lemin **lemin, t_path **paths)
 	return (steps + (lengths[i] - 1) - 1);
 }
 
-void		get_sorted_paths_lengths(size_t lens[],
+void			get_sorted_paths_lengths(size_t lens[],
 	size_t path_count, t_path **paths, t_vertex **path_with_idexes)
 {
-	size_t	i;
-	t_path	*path;
+	size_t		i;
+	t_path		*path;
 
 	i = 0;
 	path = *paths;
@@ -79,7 +79,8 @@ void		get_sorted_paths_lengths(size_t lens[],
 	insert_sort_mod(lens, path_count, path_with_idexes, 0);
 }
 
-void		insert_sort_mod(size_t arr[], size_t n, t_vertex **paths, size_t i)
+void			insert_sort_mod(size_t arr[], size_t n,
+								t_vertex **paths, size_t i)
 {
 	size_t		j;
 	size_t		min_idx;
@@ -108,10 +109,10 @@ void		insert_sort_mod(size_t arr[], size_t n, t_vertex **paths, size_t i)
 	}
 }
 
-void		calc_koefs(int koef[], size_t count, size_t lengths[])
+void			calc_koefs(int koef[], size_t count, size_t lengths[])
 {
-	size_t	i;
-	size_t	j;
+	size_t		i;
+	size_t		j;
 
 	j = 0;
 	while (j < count)

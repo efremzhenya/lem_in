@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 t_set		*new_set_elem(t_vertex *room)
 {
-	t_set *set;
+	t_set	*set;
 
 	if (!(set = (t_set *)malloc(sizeof(t_set))))
 		return (NULL);
@@ -41,7 +41,7 @@ int			add_to_set(t_set **set, t_set *elem)
 
 int			is_contain_in_set(t_set **set, size_t index)
 {
-	t_set *tail;
+	t_set	*tail;
 
 	if (!*set)
 		return (0);
