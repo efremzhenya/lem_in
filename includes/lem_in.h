@@ -6,7 +6,7 @@
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 22:29:23 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/11 22:29:23 by jpasty           ###   ########.fr       */
+/*   Updated: 2020/12/12 18:57:22 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,6 @@ void						free_all(t_lemin **lemin, t_line **lines,
 void						free_lines(t_line **lines);
 void						free_rooms(t_vertex **rooms);
 void						free_links(t_ilist **list);
-int							free_str_arr(char **temp);
 void						free_adj(t_adj **row, size_t count);
 void						free_path_rooms(t_path_room **path_rooms);
 

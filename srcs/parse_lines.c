@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/08 22:46:14 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/10 22:55:14 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/12 19:28:21 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/12 19:28:21 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t		parse_lines(t_line **lines, t_lemin **lemin, t_vertex **rooms)
 	size_t	count;
 
 	count = 0;
-	freopen("test_big.txt", "r", stdin);
+	freopen("map.txt", "r", stdin);
 	while ((line = read_next_line()) != NULL)
 	{
 		if (parse_line(line, lemin, rooms))

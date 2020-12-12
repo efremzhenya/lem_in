@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/08 22:43:34 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/10 22:37:26 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/12 19:27:39 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/12 19:27:39 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,6 @@ void			free_adj(t_adj **row, size_t count)
 		i++;
 	}
 	free(row);
-}
-
-int				free_str_arr(char **temp)
-{
-	size_t		i;
-
-	i = 0;
-	while (temp[i])
-		free(temp[i++]);
-	free(temp);
-	return (0);
 }
 
 void			free_paths(t_path **paths)
@@ -87,4 +76,21 @@ void			free_path_rooms(t_path_room **path_rooms)
 			free(temp);
 		}
 	}
+}
+
+void			free_set(t_set **set)
+{
+	t_set		*tail;
+	t_set		*tmp;
+
+	if (!set || !*set)
+		return ;
+	tail = *set;
+	while (tail->next)
+	{
+		tmp = tail;
+		tail = tail->next;
+		free(tmp);
+	}
+	free(tail);
 }

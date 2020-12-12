@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/28 00:00:02 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/06 18:03:09 by lseema           ###   ########.fr       */
+/*   Created: 2020/12/12 19:29:10 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/12 19:29:10 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,6 @@ int			is_contain_in_set(t_set **set, size_t index)
 		tail = tail->next;
 	}
 	return (tail->room->index == index);
-}
-
-void		free_set(t_set **set)
-{
-	t_set	*tail;
-	t_set	*tmp;
-
-	if (!set || !*set)
-		return ;
-	tail = *set;
-	while (tail->next)
-	{
-		tmp = tail;
-		tail = tail->next;
-		free(tmp);
-	}
-	free(tail);
 }
 
 void		remove_in_set(t_set **set, t_set *elem)

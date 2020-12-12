@@ -76,7 +76,8 @@ SOURCES_LIST = ft_memset.c\
 	ft_lstadd.c\
 	ft_lstiter.c\
 	ft_lstmap.c\
-	get_next_line.c
+	get_next_line.c\
+	free_str_arr.c
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 OBJECTS_DIRECTORY = objects/

@@ -22,6 +22,7 @@ LEMIN_SRCS = lem_in.c\
 	vertex_manager.c\
 	ilist_manager.c\
 	line_manager.c\
+	link_manager.c\
 	print_result.c\
 	parse_links.c\
 	validators.c\

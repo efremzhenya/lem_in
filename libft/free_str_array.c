@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_result.c                                     :+:      :+:    :+:   */
+/*   free_str_array.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/12 19:29:03 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/12 19:29:03 by jpasty           ###   ########.fr       */
+/*   Created: 2020/12/12 19:20:54 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/12 19:20:54 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void	print_lines(t_line **lines)
+int				free_str_arr(char **temp)
 {
-	t_line *tail;
+	size_t		i;
 
-	tail = *lines;
-	while (tail && tail->next)
-	{
-		ft_putstr(tail->value);
-		write(1, "\n", 1);
-		tail = tail->next;
-	}
-	if (tail)
-	{
-		ft_putstr(tail->value);
-		write(1, "\n", 1);
-	}
-	write(1, "\n", 1);
+	i = 0;
+	while (temp[i])
+		free(temp[i++]);
+	free(temp);
+	return (0);
 }

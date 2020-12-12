@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/07 23:22:01 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/10 22:37:26 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/12 19:27:04 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/12 19:27:04 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,8 @@ void			dejkstra_main(t_lemin **lemin, t_vertex **vertexes)
 
 void			dejkstra_init(t_vertex **vertexes, t_lemin **lemin)
 {
-	size_t		i;
 	t_vertex	*rooms;
 
-	i = 0;
 	rooms = *vertexes;
 	while (rooms->next)
 	{
@@ -101,4 +99,14 @@ void			dejkstra_init(t_vertex **vertexes, t_lemin **lemin)
 	rooms->distance = SIZE_MAX;
 	rooms->parent_index = SIZE_MAX;
 	(*lemin)->start_room->distance = 0;
+}
+
+void			free_adj_matrix(short int **matrix, size_t count)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < count)
+		free(matrix[i++]);
+	free(matrix);
 }

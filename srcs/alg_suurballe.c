@@ -5,12 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/07 23:29:16 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/10 22:37:30 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/12 19:27:11 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/12 19:27:11 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+static void		update_result(t_lemin ***lemin, size_t steps)
+{
+	(*(*lemin))->paths_count++;
+	(*(*lemin))->result_steps_count = steps;
+}
 
 void			suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps)
 {
@@ -37,10 +43,7 @@ void			suurballe_main(t_lemin **lemin, t_vertex **rooms, size_t steps)
 			free_adj_matrix(adj_matrix, (*lemin)->rooms);
 		}
 		if (steps > 0)
-		{
-			(*lemin)->paths_count++;
-			(*lemin)->result_steps_count = steps;
-		}
+			update_result(&lemin, steps);
 	}
 }
 
@@ -69,9 +72,9 @@ void			init_rooms(t_lemin **lemin, t_vertex **rooms)
 	}
 }
 
-void		split_rooms_on_paths(t_lemin **lemin)
+void			split_rooms_on_paths(t_lemin **lemin)
 {
-	t_path	*path;
+	t_path		*path;
 
 	if (!(*lemin)->paths_count)
 		return ;
@@ -99,14 +102,4 @@ void			split_and_set_weight(t_path_room **path_rooms, t_lemin **lemin)
 			path_room->room->index)->weight = -1;
 		path_room = path_room->next;
 	}
-}
-
-void		free_adj_matrix(short int **matrix, size_t count)
-{
-	size_t i;
-
-	i = 0;
-	while (i < count)
-		free(matrix[i++]);
-	free(matrix);
 }

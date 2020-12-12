@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:42:32 by lseema            #+#    #+#             */
-/*   Updated: 2020/12/11 22:13:50 by jpasty           ###   ########.ru       */
+/*   Updated: 2020/12/12 18:57:21 by jpasty           ###   ########.ru       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 int				get_next_line(const int fd, char **line);
 int				ft_new_line(char **s, char **line, int fd, int offset);
-
+int				free_str_arr(char **temp);
 #endif
