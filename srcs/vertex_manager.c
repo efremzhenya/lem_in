@@ -24,7 +24,6 @@ t_vertex	*new_vertex(char *name, size_t index, int x, int y)
 	vertex->y = y;
 	vertex->splited = 0;
 	vertex->next = NULL;
-	vertex->prev = NULL;
 	return (vertex);
 }
 
@@ -39,7 +38,6 @@ int			add_vertex(t_vertex **rooms, t_vertex *vertex)
 		tail = tail->next;
 	tail->next = vertex;
 	vertex->next = NULL;
-	vertex->prev = tail;
 	return (1);
 }
 

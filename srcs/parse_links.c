@@ -6,7 +6,7 @@
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 19:28:30 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/12 19:28:30 by jpasty           ###   ########.fr       */
+/*   Updated: 2020/12/19 13:46:06 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int			parse_link(char *line, t_lemin **lemin, t_vertex **rooms)
 	if (!*line || *line == '#' || ft_chrcount(line, '-') != 1)
 		return (0);
 	splits = ft_strsplit(line, '-');
-	if (splits[0] && splits[1] && ft_strlen(splits[0]) > 0 && *splits[1] != '#'
-	&& ft_strlen(splits[1]) > 0 && ft_strcmp(splits[0], splits[1]) &&
-	is_room_contain(rooms, splits[0]) && is_room_contain(rooms, splits[1]))
+	if (splits[0] && splits[1] && ft_strlen(splits[0]) > 0 &&
+		ft_strlen(splits[1]) > 0 && ft_strcmp(splits[0], splits[1]) &&
+		is_room_contain(rooms, splits[0]) && is_room_contain(rooms, splits[1]))
 	{
 		index1 = get_room_index(splits[0], rooms);
 		index2 = get_room_index(splits[1], rooms);

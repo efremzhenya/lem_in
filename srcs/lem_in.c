@@ -6,7 +6,7 @@
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 19:27:54 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/12 19:27:54 by jpasty           ###   ########.fr       */
+/*   Updated: 2020/12/19 15:31:46 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int				main(void)
 	rooms = NULL;
 	lines = NULL;
 	if (!init_lemin(&lemin)
-		|| (lemin->lines = parse_lines(&lines, &lemin, &rooms)) < 6
+		|| (parse_lines(&lines, &lemin, &rooms)) < 6
 		|| !lemin->links)
 	{
 		free_all(&lemin, &lines, &rooms);
@@ -40,7 +40,7 @@ int				main(void)
 		free_all(&lemin, &lines, &rooms);
 		return (print_error());
 	}
-	print_lines(&lines);
+	print_lines(&lines, lemin->do_color);
 	paths = indexing_paths(&lemin, 0, 0);
 	ants_go(&lemin, paths, lemin->ants, 0);
 	free_all(&lemin, &lines, &rooms);
@@ -55,17 +55,15 @@ int				init_lemin(t_lemin **lemin)
 	(*lemin)->step = ANT;
 	(*lemin)->next_is_end = FALSE;
 	(*lemin)->next_is_start = FALSE;
+	(*lemin)->do_color = FALSE;
 	(*lemin)->links = 0;
 	(*lemin)->rooms = 0;
-	(*lemin)->lines = 0;
-	(*lemin)->routes = 0;
 	(*lemin)->paths_count = 0;
 	(*lemin)->result_steps_count = 0;
 	(*lemin)->start_room = NULL;
 	(*lemin)->end_room = NULL;
 	(*lemin)->adj = NULL;
 	(*lemin)->paths = NULL;
-	(*lemin)->set = NULL;
 	return (1);
 }
 

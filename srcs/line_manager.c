@@ -20,7 +20,6 @@ t_line		*new_line(char **value)
 		return (NULL);
 	line->value = *value;
 	line->next = NULL;
-	line->prev = NULL;
 	return (line);
 }
 
@@ -35,6 +34,5 @@ int			add_line(t_line **lines, t_line *line)
 		tail = tail->next;
 	tail->next = line;
 	line->next = NULL;
-	line->prev = tail;
 	return (1);
 }

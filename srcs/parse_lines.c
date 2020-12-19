@@ -6,7 +6,7 @@
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 19:28:21 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/12 19:28:21 by jpasty           ###   ########.fr       */
+/*   Updated: 2020/12/19 15:31:46 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ size_t		parse_lines(t_line **lines, t_lemin **lemin, t_vertex **rooms)
 	size_t	count;
 
 	count = 0;
-	freopen("map.txt", "r", stdin);
 	while ((line = read_next_line()) != NULL)
 	{
 		if (parse_line(line, lemin, rooms))
@@ -38,6 +37,13 @@ size_t		parse_lines(t_line **lines, t_lemin **lemin, t_vertex **rooms)
 
 int			parse_line(char *line, t_lemin **lemin, t_vertex **rooms)
 {
+	if (*line == '#' && (ft_strcmp(line, "##start") != 0 &&
+						ft_strcmp(line, "##end") != 0))
+	{
+		if (ft_strequ(line, "##colorize"))
+			(*lemin)->do_color = TRUE;
+		return (1);
+	}
 	if ((*lemin)->step == ANT)
 		return (parse_ants(line, lemin));
 	else if ((*lemin)->step == ROOMS)
@@ -63,7 +69,7 @@ char		*read_next_line(void)
 	{
 		if (*line && (*line == '#') && ft_strcmp(line, "##start") != 0 &&
 				ft_strcmp(line, "##end") != 0)
-			free(line);
+			return (line);
 		else
 			return (line);
 	}

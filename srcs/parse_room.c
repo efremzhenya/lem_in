@@ -6,7 +6,7 @@
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 19:28:41 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/12 19:28:41 by jpasty           ###   ########.fr       */
+/*   Updated: 2020/12/19 11:57:11 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int				parse_room(char *line, t_lemin **lemin, t_vertex **rooms)
 	if (ft_chrcount(line, ' ') != 2 || ft_chrcount(line, '-'))
 		return (0);
 	parts = ft_strsplit(line, ' ');
-	if (!valid_int(parts[1]) || !valid_int(parts[2]))
+	if (!(*parts) || !parts[2] || !valid_int(parts[1]) || !valid_int(parts[2]))
 		return (free_str_arr(parts));
-	x = ft_atoi(parts[1]);
-	y = ft_atoi(parts[2]);
+	x = (int)ft_atoi(parts[1]);
+	y = (int)ft_atoi(parts[2]);
 	if (is_room_dup(rooms, parts[0], x, y))
 		return (free_str_arr(parts));
 	if (!*rooms)

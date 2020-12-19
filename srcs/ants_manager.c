@@ -6,7 +6,7 @@
 /*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 19:27:18 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/12 19:27:18 by jpasty           ###   ########.fr       */
+/*   Updated: 2020/12/19 15:55:00 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ int				move_ants(t_lemin **lemin, t_ant **ants,
 				write(1, " ", 1);
 			else
 				is_any_move = TRUE;
-			write(1, "L", 1);
-			ft_putnbr(i);
+			print_ant(i, (*lemin)->do_color);
 			write(1, "-", 1);
-			ft_putstr(paths[ants[i]->path_index][ants[i]->room_index].name);
+			print_room(paths[ants[i]->path_index][ants[i]->room_index].name,
+						(*lemin)->end_room->name, (*lemin)->do_color);
 			if ((*lemin)->end_room->index ==
 				paths[ants[i]->path_index][ants[i]->room_index++].index)
 				ants[i]->is_active = FALSE;

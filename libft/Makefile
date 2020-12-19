@@ -6,7 +6,7 @@
 #    By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 16:59:57 by lseema            #+#    #+#              #
-#    Updated: 2020/12/05 23:39:51 by lseema           ###   ########.fr        #
+#    Updated: 2020/12/19 11:13:11 by jpasty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,8 +76,8 @@ SOURCES_LIST = ft_memset.c\
 	ft_lstadd.c\
 	ft_lstiter.c\
 	ft_lstmap.c\
-	get_next_line.c\
-	free_str_arr.c
+	free_str_array.c\
+	get_next_line.c
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 OBJECTS_DIRECTORY = objects/

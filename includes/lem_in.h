@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpasty <jpasty@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jpasty <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/11 22:29:23 by jpasty            #+#    #+#             */
-/*   Updated: 2020/12/12 18:57:22 by jpasty           ###   ########.ru       */
+/*   Created: 2020/12/19 10:38:40 by jpasty            #+#    #+#             */
+/*   Updated: 2020/12/19 15:53:41 by jpasty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,10 @@
 # include "libft.h"
 
 /*
-** delete!
-*/
-# include <stdio.h>
-# include <stdint.h>
-
-/*
 ** BOOLEAN
 */
 # define TRUE 1
 # define FALSE 0
-
-/*
-** VERTEX TYPE
-*/
-# define DUPLEX 0
-# define IN 1
-# define OUT 2
 
 /*
 ** CURRENT DATA READ STEP
@@ -76,12 +63,6 @@ typedef struct				s_adj
 	t_ilist					*links;
 }							t_adj;
 
-typedef struct				s_queue
-{
-	t_adj					*front;
-	t_adj					*rear;
-}							t_queue;
-
 typedef	struct				s_set
 {
 	struct s_vertex			*room;
@@ -99,7 +80,6 @@ typedef struct				s_vertex
 	size_t					parent_index;
 	unsigned int			splited:1;
 	struct s_vertex			*next;
-	struct s_vertex			*prev;
 }							t_vertex;
 
 typedef struct				s_lemin
@@ -107,15 +87,13 @@ typedef struct				s_lemin
 	size_t					rooms;
 	size_t					links;
 	int						ants;
-	size_t					lines;
-	unsigned int			routes;
 	struct s_vertex			*start_room;
 	struct s_vertex			*end_room;
 	struct s_adj			**adj;
-	struct s_set			*set;
 	int						step;
 	int						next_is_start;
 	int						next_is_end;
+	int						do_color;
 	t_path					*paths;
 	size_t					paths_count;
 	size_t					result_steps_count;
@@ -124,7 +102,6 @@ typedef struct				s_lemin
 typedef struct				s_line
 {
 	char					*value;
-	struct s_line			*prev;
 	struct s_line			*next;
 }							t_line;
 
@@ -132,7 +109,7 @@ typedef struct				s_line
 ** main
 */
 int							init_lemin(t_lemin **lemin);
-void						print_lines(t_line **lines);
+void						print_lines(t_line **lines, int do_color);
 
 /*
 ** line
@@ -150,6 +127,7 @@ char						*read_next_line();
 */
 int							parse_ants(char *line, t_lemin **lemin);
 int							valid_positive_int(char *argv);
+void						print_ant(int which, int do_color);
 
 /*
 ** rooms
@@ -161,6 +139,7 @@ int							is_room_dup(t_vertex **rooms, char *name,
 int							is_room_contain(t_vertex	**rooms, char *name);
 t_vertex					*get_last_added(t_vertex **rooms);
 size_t						get_room_index(char *name, t_vertex **rooms);
+void						print_room(char *which, char *finish, int do_color);
 
 /*
 ** parse_room_type
